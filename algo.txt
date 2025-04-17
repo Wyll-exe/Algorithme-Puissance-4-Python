@@ -88,3 +88,15 @@ O(m × n × max(m, n))
 
 Pour la simulation complète d’un jeu (dans le pire des cas où l’on joue m×n coups) :
 O((m × n)² × max(m, n))
+
+
+4 - L'algorithme ne peut pas entrer une boucle infinie.Lors de son tour , il parcourt les colonnes de gauche à droite en cherchant un coup valide , si la colonne est invalide (pleine) on passe à la suivante , si une colonne est valide (place disponnible) le coup est joué et le tour (boucle) se termine (break).Si toutes les colonnes sont invalides la boucle se termine et la partie aussi avec un EX-AEQUO.
+
+5 - Il serait possible de faire beaucoup plus simple , la complexité de notre algorithme réside dans les calculs et analyse du plateau pour jouer de la façon la plus "parfaite" possible.Pour simplifier tout cela on peut utiliser la méthode de penser qu'aurait un enfant sur une partie , son objectif est gagner et il n'a pas de stratégie précise.Pour décider de gagner il sélectionne une colonne au hasard et en fait sa priorité , bien entendu il cherchera à bloquer son adversaire en cas de victoire imminente à son prochain tour.
+
+7 - 
+idée;
+colonne pleine
+colonne mi-pleine
+case isolée
+coup avec moins de valeur que précédent ?
