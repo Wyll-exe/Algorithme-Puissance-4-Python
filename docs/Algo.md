@@ -1,3 +1,6 @@
+
+## Puissance 4
+
 ### Questions
 
 > **Question 1** :<br/>
@@ -50,3 +53,56 @@
 
 **Réponse :**
 
+
+## Compression
+
+#### Questions
+
+> **Question 1** :<br/>
+> Imaginons que vous ayez une image de taille quelconque, mais carrée (1024 x 1024 px, par exemple), quelles est la structure de donnée qui vous paraît la plus appropriée pour représenter cette image et quelles sont les informations qu'elle devrait contenir ?
+
+**Réponse :**
+
+
+> **Question 2** :<br/>
+> Comment écrire l'algorithme qui permettra de réduire la taille de l'image de manière optimale, sans perdre sa qualité ?
+
+**Réponse :**
+
+
+> **Question 3** :<br/>
+> Sur quel(s) paramètre(s) de l'algorithme pourrait-on éventuellement jouer pour tolérer une certaine perte de qualité (dans des cas où l'on préfère privilégier la vitesse, par exemple) ?
+
+**Réponse :**
+
+
+> **Question 4** :<br/>
+> Estimez la complexité de cet algorithme
+
+**Réponse :**
+
+
+### Exercice complémentaire : Calcul de surface
+
+Imaginons que nous voulions mesurer (plus ou moins approximativement) la surface d'un lac donc le contour est très irrégulier, et potentiellement « **non convexe** » (i.e. dit simplement : « _il y a des creux et des bosses dans le contour_ »).
+
+En théorie, nous pourrions appliquer la formule de Gauss, qui s'écrit ainsi :
+
+> Aire = | (Sum(i=1..n-1) (x{i} * y{i+1} - x{i+1} * y{i}) + (x{n} * y{1} - x{1} * y{n})) / 2 |
+
+Gauss considère toute forme comme un polygone dont les _n_ sommets sont des coordonnées _x_ et _y_.
+
+Une autre technique pourrait consister à utiliser un quatree pour estimer la taille du lac.
+
+#### Questions
+
+> **Question 1** :<br/>
+> En partant de l'exercice précédent, écrivez un algorithme permettant de trouver l'aire de manère empirique, dans appliquer de formule mathématique (sauf des additions, naturellement)
+
+**Réponse :**
+
+
+> **Question 2** :<br/>
+> A votre avis, quelle est la meilleur méthode à utiliser en termes de nombres d'opérations à effectuer ? Expliquez votre réponse.
+
+**Réponse :**
