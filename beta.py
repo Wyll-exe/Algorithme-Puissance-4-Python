@@ -133,11 +133,15 @@ class TicTacToe():
                         print(f"PLUS DE PLACE DANS LA COLONNE {colonne+1}")
                         print(self)
                         continue
+                    print(f"Joueur {joueur} ({self.token[joueur-1]}) a joué en colonne {colonne+1}, ligne {ligne+1}")
                     break
+
+
             else:  # Ordinateur
                 print(f"Joueur {joueur} ({self.token[joueur-1]}) - L'ORDINATEUR JOUE ..")
                 self.computer_play()
                 ligne = next((i for i in range(self.nl) if self.board[i][colonne] != '.'), self.nl - 1)
+                print(f"Ordinateur a joué en colonne {colonne+1}, ligne {ligne+1}")
 
             print('\n' + '-'*30 + '\n')
             print(self)
