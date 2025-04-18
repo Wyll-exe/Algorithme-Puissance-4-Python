@@ -2,14 +2,18 @@
 
 ## Description 📝 :
 
-- L'objectif de ce projet est de créer un algorithme permettant de trouver la meilleur coup à jouer pour un jeu (ici, Puissance 4) ,
+> L'objectif de ce projet a pour premier excerice de créer un algorithme permettant de trouver la meilleur coup à jouer pour un jeu (ici, Puissance 4) ,
 plus le coup est est élévé , plus l'algorithme a de chance de gagner.
 
-- Le fichier ci-dessous explique la méthodologie que nous avons suivie pour mettre en place le code de l'algorithme :
+ Les fichier ci-dessous explique la méthodologie que nous avons suivie pour mettre en place le code de l'algorithme :
   
   ```
-  Algo.txt
+  Algo.md (version finale)
+
+  Algo.txt (brouillon)
   ```
+
+  > Le deuxième exercice explore l’utilisation des quadtrees pour compresser des images en noir et blanc. L’objectif est de représenter efficacement les zones homogènes de l’image, puis de concevoir un algorithme de compression sans perte de sa qualité.
   
 ## Technologies 🛠️ :
 
@@ -21,6 +25,13 @@ plus le coup est est élévé , plus l'algorithme a de chance de gagner.
 - #### William : [@GitHub](https://github.com/Wyll-exe)
 
 
-## Lancer le projet 🚀 :
+## Lancer les projets 🚀 :
+
+>***Algorithme - Puissance 4**
+
+- python ? .py
+
+
+>***Algorithme - Compression**
 
 - ?

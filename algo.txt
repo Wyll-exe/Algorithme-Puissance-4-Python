@@ -1,5 +1,5 @@
 trouver le meilleur coup a jouer pour un jeu style puissance 4/échec/dames, etc
-(plus le coup est élevé, plus on a de chance de gagner)
+(plus le coup est élevé, plus on a de chance de gagner).
 
 
 1 - pour le puissance 4 :

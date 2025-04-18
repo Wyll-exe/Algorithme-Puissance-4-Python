@@ -1,4 +1,4 @@
-import os
+
 
 class TicTacToe():
 
@@ -79,7 +79,7 @@ class TicTacToe():
         return False
 
     def new_game(self, nl=6, nc=7, token=('@', 'X')):
-        os.system('clear')
+        
         print(self)
 
         victoire = False
@@ -94,7 +94,7 @@ class TicTacToe():
                     print(f"Joueur {joueur} ({self.token[joueur-1]}), C'EST TON TOUR !")
                     colonne = input('Colonne jouée: ')
                     if colonne not in {str(i+1) for i in range(self.nc)}:
-                        os.system('clear')
+                        
                         print("IMPOSSIBLE DE METTRE CE COUP")
                         print(f"TU DOIS METTRE UN CHIFFRE ENTRE 1 ET {self.nc}!")
                         print(self)
@@ -113,7 +113,7 @@ class TicTacToe():
                     if coupvalide:
                         break
 
-            os.system('clear')
+            
             print(self)
 
             if compteur > 6:  # Vérification à partir du 7ème coup
