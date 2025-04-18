@@ -1,5 +1,3 @@
-import os
-
 class TicTacToe():
     def __init__(self, nl=6, nc=7, token=('@', 'X')):
         self.nl = nl
@@ -109,7 +107,7 @@ class TicTacToe():
             self.coup(2, best_col)
 
     def new_game(self, nl=6, nc=7, token=('@', 'X')):
-        os.system('clear')
+        print('\n' + '-'*30 + '\n')
         print(self)
 
         victoire = False
@@ -124,14 +122,14 @@ class TicTacToe():
                     print(f"Joueur {joueur} ({self.token[joueur-1]}), C'EST TON TOUR !")
                     colonne = input('Colonne jouée: ')
                     if colonne not in {str(i+1) for i in range(self.nc)}:
-                        os.system('clear')
+                        print('\n' + '-'*30 + '\n')
                         print("COUP INVALIDE")
                         print(self)
                         continue
                     colonne = int(colonne) - 1
                     coupvalide, ligne = self.coup(joueur, colonne)
                     if not coupvalide:
-                        os.system('clear')
+                        print('\n' + '-'*30 + '\n')
                         print(f"PLUS DE PLACE DANS LA COLONNE {colonne+1}")
                         print(self)
                         continue
@@ -141,7 +139,7 @@ class TicTacToe():
                 self.computer_play()
                 ligne = next((i for i in range(self.nl) if self.board[i][colonne] != '.'), self.nl - 1)
 
-            os.system('clear')
+            print('\n' + '-'*30 + '\n')
             print(self)
 
             if compteur > 6:
