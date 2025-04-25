@@ -196,28 +196,6 @@ Les données de départ sont des images en noir et blanc, mais vous pouvez élar
 > **Question 4** :<br/>
 > Estimez la complexité de cet algorithme
 
-### Exercice complémentaire : Calcul de surface
-
-Imaginons que nous voulions mesurer (plus ou moins approximativement) la surface d'un lac donc le contour est très irrégulier, et potentiellement « **non convexe** » (i.e. dit simplement : « _il y a des creux et des bosses dans le contour_ »).
-
-En théorie, nous pourrions appliquer la formule de Gauss, qui s'écrit ainsi :
-
-> Aire = | (Sum(i=1..n-1) (x{i} * y{i+1} - x{i+1} * y{i}) + (x{n} * y{1} - x{1} * y{n})) / 2 |
-
-Gauss considère toute forme comme un polygone dont les _n_ sommets sont des coordonnées _x_ et _y_.
-
-Une autre technique pourrait consister à utiliser un quatree pour estimer la taille du lac.
-
-#### Questions
-
-> **Question 1** :<br/>
-> En partant de l'exercice précédent, écrivez un algorithme permettant de trouver l'aire de manère empirique, dans appliquer de formule mathématique (sauf des additions, naturellement)
-
-> **Question 2** :<br/>
-> A votre avis, quelle est la meilleur méthode à utiliser en termes de nombres d'opérations à effectuer ? Expliquez votre réponse.
-
-**N.B. :** La méthode proposée ici est proche d'un algorithme très classique et très utilisé, basé sur des principes statistiques : l'[algorithme de Monte-Carlo](https://fr.wikipedia.org/wiki/Algorithme_de_Monte-Carlo).
-
 ## Rendu
 
 - Le rendu devra être fait sous forme d'un document unique comportant les réponses aux différentes questions ;
