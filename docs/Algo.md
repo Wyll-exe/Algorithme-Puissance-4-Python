@@ -233,7 +233,7 @@ Pour chaque ligne de l'image :
     à la fin de la ligne, enregistrer le dernier (compteur, pixel)
 ```
 
-Si une autre cas exemple d'image devrait être choisit avec des pixels de répétitions consécutives, l'algorithme d'Huffman serait sûrement le choix le plus pertinent.C’est une méthode de compression sans perte qui repose sur la fréquence d’apparition des données , plus des valeurs sont fréquentes moins elles sont codées avec de bits et à l'inverse les valeurs les plus rares sont codées avec plus de bits.
+Si une autre cas exemple d'image devrait être choisit avec des pixels de répétitions consécutives, l'algorithme d'Huffman ou LZW seront sûrement les choix les plus pertinent.C’est une méthode de compression sans perte qui repose sur la fréquence d’apparition des données , plus des valeurs sont fréquentes moins elles sont codées avec de bits et à l'inverse les valeurs les plus rares sont codées avec plus de bits.
 
 
 
@@ -244,13 +244,54 @@ Si une autre cas exemple d'image devrait être choisit avec des pixels de répé
 **Réponse :**
 
 
+Il faudrait utiliser une compression lossy , on cherche des détails dans nos données qui ne sont pas importante à l'humain , c'est ce que fait le format JPG / JPEG.Plus la compression est forte plus la perte de qualité augmente.La transformée en cosinus discrète (DCT) permet de découpée une image en bloc de 8x8 pixels , on obtient un bloc de 64 coefficients (chacun à une fréquence) , les blocs en haut à gauche auront les plus basses fréquences et seront facilment comparables contrairement à ceux en bas à droite ([Exemple](https://freight.cargo.site/t/original/i/f67e1a52ca308e9d7ab916da4415f3b199d0a124e6d59587aa95766200ec2183/DCT_.jpg) )
 
+Vient ensuite la quantification 
+```
+matrice de quantification :
+[ 16  11  10  16  24  40  51  61 ]
+[ 12  12  14  19  26  58  60  55 ]
+[ 14  13  16  24  40  57  69  56 ]	
+[ 14  17  22  29  51  87  80  62 ]
+[ 18  22  37  56  68 109 103  77 ]
+[ 24  35  55  64  81 104 113  92 ]
+[ 49  64  78  87 103 121 120 101 ]
+[ 72  92  95  98 112 100 103  99 ]
 
-Il faudrait utiliser une compression lossy , on cherche des détails dans nos données qui ne sont pas importante à l'humain , c'est ce que fait le format JPG.
+coefficient dct :
+[  120   -40    -35   -22    -5    10    16    20 ]
+[  -60   -30    -20    -8    -2     3     7     9 ]
+[  -35   -12     -8    -3     0     2     4     6 ]
+[  -20    -7     -4    -1     1     3     6     8 ]
+[   -5    -2     -1     0     3     5     7     9 ]
+[   10     3      2     1     4     6     8    12 ]
+[   16     7      4     3     6     9    10    15 ]
+[   20     9      6     5     7    12    14    18 ]
+```
+L'algorithme va réaliser une matrice quantifiée via un calcul de divisions des coefficients et de la matrice de quantifications à ses valeurs en arrondisant à l'entier le plus proche , ce qui donne 
+
+```
+matrice quantifiée :
+[   8   -4   -4   -1    0    0    0    0 ]
+[  -5   -3   -1    0    0    0    0    0 ]
+[  -3   -1   -1    0    0    0    0    0 ]
+[  -1    0    0    0    0    0    0    0 ]
+[   0    0    0    0    0    0    0    0 ]
+[   0    0    0    0    0    0    0    0 ]
+[   0    0    0    0    0    0    0    0 ]
+[   0    0    0    0    0    0    0    0 ]
+```
+On dispose de beaucoup moins de valeurs stockées , celles à 0 ne sont plus importantes et peuvent être supprimées.Il y a possibilité d'allez encore plus loin dans la compression en utilisant l'encodage de Huffman ou run-length.
+
 
 > **Question 4** :<br/>
 > Estimez la complexité de cet algorithme
 
 **Réponse :**
 
+L'algorithme se discerne en plusieurs étapes :
+- Transformation Discrète en Cosinus (DCT)
+- La Quantification
+- Compression (encodage des coefficients non nuls)
+- Reconstruction de l'image
 
