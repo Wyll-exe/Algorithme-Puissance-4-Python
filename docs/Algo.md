@@ -98,6 +98,12 @@ fonction countalignement(grille, x, y, player) :
 
 **Réponse :**
 
+Pour un coup unique (c’est-à-dire, l’évaluation du plateau pour choisir le meilleur coup) :
+O(m × n × max(m, n))
+
+Pour la simulation complète d’un jeu (dans le pire des cas où l’on joue m×n coups) :
+O((m × n)² × max(m, n))
+
 
 > **Question 4** :<br/>
 > Êtes-cous certain que votre algorithme termine ? Ou pourrait-il éventuellement entrer dans une boucle infinie ? Expliquez pourquoi ?
@@ -131,6 +137,14 @@ beta.py
 > Existe-t-il un moyen d'optimiser la résolution du problème en évitant d'explorer certains coups qui, quoiqu'il arrive, ne pourraient pas être choisis ? Si oui, proposer une solution.
 
 **Réponse :**
+
+
+En termes d'optimisation , il y a plusieurs facteurs qui seraient possible délaisser.Les coups que nous devrions éviter d'explorer seront ceux-ci
+
+- Une colonne pleine , il n'y a rien à faire
+- Jouer sur une colonne à moitié-pleine où l'issue de ne permet de terminé la partie
+- Une case isolée , sur un début de partie au milieu puis revirement après une colonne pleine
+- Si un coup a une valeur précédente que celui précedent (à voir)
 
 
 ## Compression
@@ -229,6 +243,9 @@ Si une autre cas exemple d'image devrait être choisit avec des pixels de répé
 
 **Réponse :**
 
+
+
+
 Il faudrait utiliser une compression lossy , on cherche des détails dans nos données qui ne sont pas importante à l'humain , c'est ce que fait le format JPG.
 
 > **Question 4** :<br/>
@@ -237,27 +254,3 @@ Il faudrait utiliser une compression lossy , on cherche des détails dans nos do
 **Réponse :**
 
 
-### Exercice complémentaire : Calcul de surface
-
-Imaginons que nous voulions mesurer (plus ou moins approximativement) la surface d'un lac donc le contour est très irrégulier, et potentiellement « **non convexe** » (i.e. dit simplement : « _il y a des creux et des bosses dans le contour_ »).
-
-En théorie, nous pourrions appliquer la formule de Gauss, qui s'écrit ainsi :
-
-> Aire = | (Sum(i=1..n-1) (x{i} * y{i+1} - x{i+1} * y{i}) + (x{n} * y{1} - x{1} * y{n})) / 2 |
-
-Gauss considère toute forme comme un polygone dont les _n_ sommets sont des coordonnées _x_ et _y_.
-
-Une autre technique pourrait consister à utiliser un quatree pour estimer la taille du lac.
-
-#### Questions
-
-> **Question 1** :<br/>
-> En partant de l'exercice précédent, écrivez un algorithme permettant de trouver l'aire de manère empirique, dans appliquer de formule mathématique (sauf des additions, naturellement)
-
-**Réponse :**
-
-
-> **Question 2** :<br/>
-> A votre avis, quelle est la meilleur méthode à utiliser en termes de nombres d'opérations à effectuer ? Expliquez votre réponse.
-
-**Réponse :**
