@@ -8,10 +8,17 @@
 
 **Réponse :**
 
+On possède une fonction qui donne un nombre a chaque case.
+Le coup doit être dans la diagonale ou la ligne ou la colonne d'un autre jeton et plus il y de jetons appartenant au joueur a dans la meme ligne/colonne/diagonale mieux c'est. Il faut aussi éviter que le joueur adverse puisse aligner 4 jetons, cette problématique est la priorité. Moins le jeton est placé proche d'un bord mieux c'est.
+Après ces calculs une valeur est attribué a chaque case, plus elle est élevée meilleur c'est.
 
 
-
-
+Si la case comprends déjà un jeton alors sa valeur est 0.
+On assigne une valeur a chaque case en fonction de toutes les possibilités qu'elle offre. Plus la valeur est élevée plus la case offre de possibilités.
+Les cases qui permettent a l'adversaire d'aligner plusieurs jetons augmentent en valeur, la valeur passe au maximum si la case permet d'aligner 4 jetons.
+retourner la case avec la valeur la plus haute.
+On simule l'action de l'adversaire, il va jouer en priorité sur les cases avec la moins grosse valeur pour nous car ce sont les cases avec la plus grosse valeur pour lui.
+On refais les calculs a chaque fois qu'un jeton est joué.
 
 
 > **Question 2** :<br/>
@@ -19,7 +26,72 @@
 
 **Réponse :**
 
+```
+valeur_maximum = 20
 
+fonction case_value(grille, x, y, player) :
+	Si plateau[x][y] contient un jeton :
+		Retourner 0
+	valeur <- 0
+	Pour chaque direction dans (horizontale, verticale, diagonale_gauche, diagonale_droite) :
+		compteur <- countalignement(grille, x, y, player)
+		si (compteur + 1) > 4 :
+			valeur <- valeur + valeur_maximum
+		sinon :
+			valeur <- valeur + (compteur)²
+	Retourner valeur
+
+fonction choosebestcase(grille, joueur) :
+	maxvalue <- -infini
+	bestcase <- null
+	Pour x de 0 à lageurgrille - 1 :
+		pour y de hauteurgrille - 1 :
+			valeur <- case_value(grille, x, y, player)
+			si value > maxvalue :
+				maxvalue <- value
+				bestcase <- (x, y)
+	Retourner bestcase
+
+fonction choosecaseforopponent(grille, player) :
+	minvalue <- +infini
+	casechoose <- null
+	Pour x de 0 à lageurgrille - 1 :
+		pour y de hauteurgrille - 1 :
+			valeur <- case_value(grille, x, y, player)
+			si value < minvalue :
+				minvalue <- value
+				casechoose <- (x, y)
+	Retourner casechoose
+
+fonction play() :
+	grille <- init(largeurgrille, hauteurgrille)
+	Tant que gamenotover(grille) :
+		caseplayed <- choosebestcase(grille, us)
+		action(grille, caseplayed, us)
+		updatevalue(grille)
+		Si checkvictory(grille, us) ou draw(grille) :
+			Afficher "Partie finie"
+			Arreter la boucle
+		caseopponentplayed <- choosecaseforopponent(grille, us)
+		caseplayed(grille, caseopponentplayed, adversaire)
+		updatevalue(grille)
+		Si checkvictory(grille, opponent) ou draw(grille) :
+			Afficher "Partie finie"
+			Arreter la boucle
+
+fonction countalignement(grille, x, y, player) :
+	compteur <- 0
+	(dx, dy) <- vectordirection(direction)
+	i <- 1
+	Tant que casevalid(x + i*dx, y + i*dy, grille) et grille[x + i*dx][y + i*dy] == player :
+		compteur <- compteur + 1
+		i <- i + 1
+	i <- 1
+	Tant que casevalid(x - i*dx, y - i*dy, grille) et grille[x - i*dx][y - i*dy] == player :
+		compteur <- compteur + 1
+		i <- i + 1
+	Retourner compteur
+```
 
 > **Question 3** :<br/>
 > Estimez la complexité de l'algorithme. Appuyez votre calcul sur les opérations associés à chaque structure algorithmique de base (d'où l'importance d'avoir un pseudo-code structuré ;o)
@@ -32,11 +104,14 @@
 
 **Réponse :**
 
+L'algorithme ne peut pas entrer une boucle infinie.Lors de son tour , il parcourt les colonnes de gauche à droite en cherchant un coup valide , si la colonne est invalide (pleine) on passe à la suivante , si une colonne est valide (place disponnible) le coup est joué et le tour (boucle) se termine (break).Si toutes les colonnes sont invalides la boucle se termine et la partie aussi avec un EX-AEQUO.
 
 > **Question 5** :<br/>
 > D'après vous, serait-il possible d'imaginer un algorithme globalement plus simple, c'est-à-dire de complexité moins grande pour résoudre le problème ? Pourquoi ?
 
 **Réponse :**
+
+Il serait possible de faire beaucoup plus simple , la complexité de notre algorithme réside dans les calculs et analyse du plateau pour jouer de la façon la plus "parfaite" possible.Pour simplifier tout cela on peut utiliser la méthode de penser qu'aurait un enfant sur une partie , son objectif est gagner et il n'a pas de stratégie précise.Pour décider de gagner il sélectionne une colonne au hasard et en fait sa priorité , bien entendu il cherchera à bloquer son adversaire en cas de victoire imminente à son prochain tour.
 
 
 #### Questions complémentaires
@@ -47,6 +122,10 @@
 
 **Réponse :**
 
+fichier
+```
+beta.py
+```
 
 > **Question 7** :<br/>
 > Existe-t-il un moyen d'optimiser la résolution du problème en évitant d'explorer certains coups qui, quoiqu'il arrive, ne pourraient pas être choisis ? Si oui, proposer une solution.
