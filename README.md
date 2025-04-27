@@ -31,9 +31,7 @@ plus le coup est est élévé , plus l'algorithme a de chance de gagner.
 
 >**Algorithme - Puissance 4**
 
-- python ? .py
+- python ?.py
 
 
->**Algorithme - Compression**
 
-- ?
