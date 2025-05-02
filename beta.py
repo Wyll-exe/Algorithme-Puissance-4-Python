@@ -1,5 +1,6 @@
 class TicTacToe():
     def __init__(self, nl=6, nc=7, token=('@', 'X')):
+        # Initialise le plateau et démarre une nouvelle partie
         self.nl = nl
         self.nc = nc
         self.token = token
@@ -7,12 +8,14 @@ class TicTacToe():
         self.new_game(self.nl, self.nc, self.token)
 
     def __str__(self):
+        # Retourne une représentation texte du plateau
         board_str = ' '.join([str((i+1) % 10) for i in range(self.nc)]) + '\n'
         for i in range(self.nl):
             board_str += ' '.join(self.board[i]) + '\n'
         return board_str
 
     def coup(self, joueur, colonne):
+        # Joue un jeton dans la colonne donnée
         board_colonne = [ligne[colonne] for ligne in self.board]
         ligne = board_colonne.count('.')
         if ligne == 0:
@@ -23,6 +26,7 @@ class TicTacToe():
             return True, ligne
 
     def check_victoire(self, ligne, colonne, joueur):
+        # Vérifie si le joueur a gagné après un coup
         pattern = self.token[joueur-1] * 4
 
         if pattern in ''.join([l[colonne] for l in self.board]):
@@ -52,8 +56,8 @@ class TicTacToe():
 
         return False
 
-    # 
     def case_value(self, x, y, joueur):
+        # Évalue la valeur stratégique d'une case
         if self.board[y][x] != '.':
             return 0
         valeur = 0
@@ -62,14 +66,13 @@ class TicTacToe():
             count = self.count_alignement(x, y, dx, dy, joueur)
             valeur += count ** 2
             if count + 1 >= 4:
-                valeur += 100  # Bonus si ça aligne 4
-        # Bonus si la case est centrale
+                valeur += 100
         centre = self.nc // 2
         valeur += max(0, centre - abs(x - centre))
         return valeur
 
-    # 
     def count_alignement(self, x, y, dx, dy, joueur):
+        # Compte les jetons alignés dans une direction donnée
         compteur = 0
         token = self.token[joueur-1]
 
@@ -85,28 +88,28 @@ class TicTacToe():
 
         return compteur
 
-    # validation
     def case_valide(self, x, y):
+        # Vérifie que la case (x, y) est sur le plateau
         return 0 <= x < self.nc and 0 <= y < self.nl
 
-    # ordinateur
     def computer_play(self):
+        # Joue le meilleur coup possible pour l'ordinateur
         max_val = -1
         best_col = None
         for x in range(self.nc):
             for y in range(self.nl-1, -1, -1):
                 if self.board[y][x] == '.':
                     val = self.case_value(x, y, 2)
-                    # Simulation blocage joueur 
                     val += self.case_value(x, y, 1) * 2
                     if val > max_val:
                         max_val = val
                         best_col = x
-                    break  # on ne peut jouer que sur la première case vide de la colonne
+                    break
         if best_col is not None:
             self.coup(2, best_col)
 
     def new_game(self, nl=6, nc=7, token=('@', 'X')):
+        # Lance une nouvelle partie et gère la boucle de jeu
         print('\n' + '-'*30 + '\n')
         print(self)
 
@@ -117,7 +120,7 @@ class TicTacToe():
             compteur += 1
             joueur = (compteur + 1) % 2 + 1
 
-            if joueur == 1:  # Joueur
+            if joueur == 1:
                 while True:
                     print(f"Joueur {joueur} ({self.token[joueur-1]}), C'EST TON TOUR !")
                     colonne = input('Colonne jouée: ')
@@ -135,9 +138,7 @@ class TicTacToe():
                         continue
                     print(f"Joueur {joueur} ({self.token[joueur-1]}) a joué en colonne {colonne+1}, ligne {ligne+1}")
                     break
-
-
-            else:  # Ordinateur
+            else:
                 print(f"Joueur {joueur} ({self.token[joueur-1]}) - L'ORDINATEUR JOUE ..")
                 self.computer_play()
                 ligne = next((i for i in range(self.nl) if self.board[i][colonne] != '.'), self.nl - 1)
